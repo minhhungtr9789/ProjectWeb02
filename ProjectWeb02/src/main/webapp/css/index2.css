@@ -1,0 +1,202 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+.dsSanPham .single-product .product-f-image .product-hover {
+    border: 0px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.dsSanPham .container {
+    border: 1px solid #ddd;
+}
+
+.dsSanPham .single-product .product-f-image img {
+    margin: 0px auto;
+    display: inline-block;
+}
+
+.dsSanPham .col {
+    padding: 0px;
+}
+
+.dsSanPham .row {
+    padding: 0px 15px;
+}
+
+.single-product h2 {
+    font-size: 14px;
+}
+
+.footer-top-area {
+    padding: 35px 0;
+}
+
+a.navbar-brand {
+    color: #6e6a6a!important;
+    font-size: 15px;
+    margin: 0px;
+    padding: 10px 20px;
+}
+
+a.navbar-brand:hover {
+    background: #5a88ca;
+    color: #FFF !important;
+}
+
+.mainmenu-area nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+    padding: 0px;
+}
+
+.footer-bottom-area {
+    padding: 5px 0px;
+}
+
+h2.footer-wid-title {
+    font-family: Helvetica,Arial,sans-serif !important;
+}
+body{
+	font-family: Helvetica,Arial,sans-serif !important;
+}
+.mainmenu-area {
+	border-bottom: 1px solid #efefef;
+}
+
+.header-area {
+	border-bottom: 1px solid #efefef;
+}
+
+.site-branding-area {
+	border-bottom: 1px solid #efefef;
+}
+
+.divider {border-top: 1px solid #ccc;}
+
+.divider {
+	border-top: 1px solid red;
+}
+
+.logo h1 {
+	margin: 20px 0px;
+}
+
+.shopping-item {
+	margin: 20px 0px;
+	border-radius: none;
+	border: 1px solid #ccc;
+}
+
+.searchBar form.form-inline {
+	width: 100%;
+	height: 100%;
+}
+
+.logo {
+	display: inline-block;
+	float: left;
+	clear: right;
+}
+
+.searchBar {
+	display: inline-block;
+	float: left;
+	margin: 20px 0px;
+}
+
+.searchBar {
+	width: 100%;
+	height: 47px;
+}
+a{
+	text-decoration: none !important;
+}
+
+.mainmenu-area .mn-sub #phone-bg ul>li>a {
+	background: none;
+	padding: 0px;
+	color: #666;
+}
+
+.mainmenu-area .mn-sub #phone-bg ul>li:hover>a {
+	color: #5a88ca;
+}
+
+.mainmenu-area ul.navbar-nav > li > a {
+	padding: 13px 20px;
+}
+
+.user-menu li a {
+	padding: 6px;
+}
+.searchBar  input.form-control.mr-sm-2{
+	height: 100%;
+	/*border-right: none;*/
+	border-radius: 0px;
+	margin-right: -3px;
+	width: 100%;
+}
+.searchBar  .btn.btn-primary.my-2.my-sm-0{
+
+height: 47px;
+
+border-radius: unset;
+
+position: absolute;
+
+right: 23px;
+}
+
+.mainmenu-area .clearlist{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.mainmenu-area .mn-sub #phone-bg ul {
+	width: 162px;
+	float: left;
+}
+.mainmenu-area ul>li:hover .mn-sub{
+	visibility: visible;
+	opacity: 1;
+	top: 42px;
+}
+
+ul.mn-sub.phuKien {
+    background-image: url('../img/img_bg_menu/phuKien.jpg');
+}
+
+ul.mn-sub.laptop {
+    background-image: url('../img/img_bg_menu/laptop.jpg');
+}
+
+ul.mn-sub.tablet {
+    background-image: url('../img/img_bg_menu/tablet.jpg');
+}
+.mainmenu-area .mn-sub{
+	padding: 15px;
+	display: block;
+	width: 700px;
+	height: 300px;
+	background-image: url('../img/img_bg_menu/mobile.jpg');
+	position: absolute;
+	top: 100px;
+	transition: .3s;
+	z-index: 1000;
+	visibility: hidden;
+	opacity: 0;
+	box-shadow: 0px 0px 1px #5a88ca;
+}
+.mainmenu-area .mn-sub #phone-bg{
+	display: flex;
+	flex-wrap: nowrap;
+	margin-bottom: 20px;
+}
+
+.hangCC {
+	width: 380px;
+	padding-top: 20px;
+	border-top: 1px solid #c8cacb;
+}

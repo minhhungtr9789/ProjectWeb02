@@ -1,0 +1,55 @@
+* {
+    padding: 0;
+    margin: 0
+}
+
+a#nav-home-tab, a#nav-profile-tab {
+    border-radius: unset;
+}
+
+#content-cart #right-content {
+    height: fit-content;
+}
+
+#content-cart #left-content #header-list h4 {
+    margin-bottom: 0;
+    padding: 12px;
+}
+
+#content-cart #left-content .payment {
+    background: white;
+}
+
+#content-cart #left-content .payment nav {
+    padding: 15px;
+}
+
+#content-cart #left-content .payment .tab-content {
+    padding: 35px;
+}
+
+#content-cart #left-content .payment .tab-content .visa label {
+    font-size: 12px;
+}
+
+#content-cart #left-content .payment .tab-content .cvv-label {
+}
+
+#content-cart #left-content .payment .tab-content .visa label {
+    display: block;
+}
+
+#content-cart #left-content .payment .tab-content .visa input {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#content-cart #left-content .payment .tab-content .visa input:focus {
+    outline: unset;
+    border: 1px solid #5a88ca;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+#content-cart #left-content .payment .tab-content button {
+    text-transform: uppercase;
+}

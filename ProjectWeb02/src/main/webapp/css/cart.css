@@ -1,0 +1,25 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.delete-product .modal-content {
+    border-radius: unset;
+}
+
+button.btn.btn-outline-primary.trash.float-right.minus {}
+
+
+
+.delete-product .modal-content button.btn.btn-secondary {
+    border-radius: unset;
+}
+
+
+
+button.btn.btn-outline-primary.trash.float-right.minus {}
+
+
+#left-content{
+    margin-left: -15px;
+}

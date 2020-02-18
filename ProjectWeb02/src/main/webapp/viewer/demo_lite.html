@@ -1,0 +1,57 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>LC Lightbox - Image Gallery Demo</title>
+
+
+    <script src="lib/jquery.js" type="text/javascript"></script>
+    <script src="js/lc_lightbox.lite.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/lc_lightbox.css"/>
+    <!-- SKINS -->
+    <link rel="stylesheet" href="skins/minimal.css"/>
+    <!-- ASSETS -->
+    <script src="lib/AlloyFinger/alloy_finger.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!--<div class="container">-->
+    <div class="content_pictures">
+        <a class="elem"
+           href="img/IP1164G/1.jpg"
+           data-lcl-thumb="img/IP1164G/1.jpg">
+            <img src="img/IP1164G/1.jpg" alt="">
+        </a>
+        <a class="elem"
+           href="img/IP1164G/4.jpg"
+           data-lcl-thumb="img/IP1164G/4.jpg">
+            <img src="img/IP1164G/4.jpg" alt="">
+        </a>
+    </div>
+<!--</div>-->
+
+
+<!-- //////////////////////////////////////////////// -->
+<!-- LIGHTBOX INITIALIZATION -->
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        // live handler
+        lc_lightbox('.elem', {
+            wrap_class: 'lcl_fade_oc',
+            gallery: true,
+            thumb_attr: 'data-lcl-thumb',
+
+            skin: 'minimal',
+            radius: 0,
+            padding: 0,
+            border_w: 0,
+        });
+
+    });
+</script>
+
+
+</body>
+</html>

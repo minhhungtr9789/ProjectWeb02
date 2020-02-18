@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0
+}
+.content-about .article-template-right h1 {
+    font-weight: 700;
+    line-height: 32px;
+    font-size: 24px;
+    color: #000;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+}
+.content-about .row .article-template-right{
+    background: white;
+    padding: 50px ;
+}
+.content-about{
+    margin-bottom: 15px;
+}
+.content-about .article-template-right .title{
+    font-weight: bold;
+}
+.content-about .article-template-right .big-title{
+    font-weight: 700;
+    font-size: 20px;
+}

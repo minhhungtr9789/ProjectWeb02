@@ -1,0 +1,88 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.content-account .one-line a {
+    color: #888;
+}
+
+.content-account .one-line {
+    width: 100%;
+    padding: 10px 15px;
+}
+
+.content-account .one-line :hover {
+}
+
+.content-account .one-line {
+    margin: 15px 0px 0px;
+}
+
+.content-account .one-line:hover,active {
+    background: #efefef;
+}
+
+.content-account .title img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+.content-account .title img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.content-account .one-line.active {
+    background: #efefef;
+    width: 100%;
+}
+
+.content-account {
+    color: #888;
+}
+
+.content-account .title > div {
+    display: inline-block;
+    color: #333;
+}
+
+.content-account {
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.content-account .right-content .account-profile .profile form div {margin: 15px 0px 0px;}
+
+.content-account .right-content .account-profile .profile form button.btnUd {
+    display: inherit;
+    margin: 15px auto;
+}
+
+.content-account .right-content {padding-left: 0px;}
+
+.content-account .right-content .account-profile .profile form div label {
+    width: 26%;
+}
+
+.content-account .right-content .account-profile .profile form div input {
+    width: 177%;
+    border-radius: unset;
+}
+
+.content-account .right-content .account-profile .profile form div input:focus, select:focus {
+    border: 1px solid #5a88ca;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    outline: unset;
+}
+
+select {
+    border-radius: unset;
+    outline: unset;
+}
+
+.content-account .title > div {
+    display: inline-block;
+    color: #333;
+}

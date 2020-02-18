@@ -1,0 +1,209 @@
+* {
+    padding: 0;
+    margin: 0
+}
+
+.listImgSession .itemImg .itemImgContent .image-tools .image-tool-delete {
+    background-color: rgba(238, 77, 45, .54);
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    border-radius: 32px;
+    opacity: 1;
+    display: inline-block;
+    transition: background-color .5s ease;
+    cursor: pointer;
+}
+
+.image-tool-delete {
+}
+
+.listImgSession .itemImg .itemImgContent .image-tools {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    right: 47px;
+    bottom: 10px;
+    padding-top: 12px;
+    text-align: center;
+    color: white;
+}
+
+.listImgSession {
+    padding-left: 6px;
+    padding-right: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.listImgSession .itemImg .itemImgContent .itemImgExplain-text {
+    margin-top: 8px;
+    text-align: center;
+    color: #999;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* font-size: 14px; */
+}
+
+.listImgSession .itemImg .itemImgContent .itemImgUpload .itemImgFileUpload .upload .uploadIcon {
+    padding: 0;
+    /*background: #fff;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.listImgSession .itemImg .itemImgContent .itemImgUpload .itemImgFileUpload .upload .uploadIcon:hover {
+    /*background: #f5fbff;*/
+}
+
+.listImgSession .itemImg .itemImgContent .itemImgUpload .itemImgFileUpload .upload .uploadIcon i {
+    color: #1791f2;
+    font-size: 30px;
+}
+
+.listImgSession .itemImg .itemImgContent .itemImgUpload .itemImgFileUpload .upload {
+    height: 100%;
+}
+
+.listImgSession .itemImg .itemImgContent .itemImgUpload .itemImgFileUpload {
+    width: 100%;
+    height: 100%;
+    border: 1px solid transparent;
+}
+
+.listImgSession .itemImg .itemImgContent .itemImgUpload {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    cursor: pointer;
+    border: 1px dashed #1791f2;
+    border-radius: 2px;
+    -webkit-transition: color .25s ease, border-color .25s ease;
+    transition: color .25s ease, border-color .25s ease;
+    background: transparent 50% no-repeat;
+    background-size: contain;
+}
+.listImgSession .itemImg .itemImgContent .itemImgUpload:hover {
+    background-color: #f5fbff !important;
+}
+.listImgSession .itemImg .itemImgContent {
+    position: relative;
+    height: 0;
+    padding-top: 100%;
+    border-radius: 2px;
+    cursor: move;
+}
+
+.listImgSession .itemImg {
+    width: 127px;
+    max-width: 140px;
+    min-height: 127px;
+    max-height: 115px;
+    margin: 0 7px 40px;
+}
+
+form.form-horizontal .form-actions {
+    text-align: center;
+}
+
+input[type=email], input[type=url], input[type=search], input[type=tel], input[type=color], input[type=text], input[type=password], input[type=datetime], input[type=datetime-local], input[type=date], input[type=month], input[type=time], input[type=week], input[type=number], textarea, select, option {
+    color: black;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.modal-title {
+    font-size: 20px;
+    display: inline-block;
+}
+
+.modal-header .close {
+    padding: 1rem 1rem;
+    margin: -1rem -1rem -1rem auto;
+}
+
+.modal-body {
+    font-size: 16px;
+}
+
+table#dynamic-table a.product-name {
+    color: #1963AA;
+}
+
+table#dynamic-table .product-name-col > div > img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+}
+
+table#dynamic-table .product-name-col > div > span {
+    bottom: -7px;
+    left: 92px;
+    width: 13px;
+    height: 13px;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    background: white;
+    z-index: 2000;
+    border-top: none;
+    border-left: none;
+    box-shadow: 1px 1px 0px 0px rgba(89, 117, 255, 0.34);
+}
+
+table#dynamic-table .product-name-col > div {
+    position: absolute;
+    display: inline-block;
+    background: white;
+    display: none;
+    /* border: 1px solid red; */
+    z-index: 1000;
+    left: 1px;
+    top: -196px;
+    box-shadow: 0px 0px 5px 1px rgba(89, 117, 255, 1);
+    transition: visibility 0s, opacity 0.3s linear;
+    transition-delay: 0.5s;
+}
+
+table#dynamic-table .product-name-col:hover > div {
+    display: block;
+    padding: 10px;
+    z-index: 10000 !important;
+}
+
+table#dynamic-table .product-name-col {
+    position: relative;
+}
+
+table#dynamic-table a.product-name > div > img {
+    width: 200px;
+    height: 200px;
+}
+
+table#dynamic-table .color-blue {
+    color: #1963AA;
+}
+
+table#dynamic-table .sortt {
+    display: none;
+}
+
+table#dynamic-table tr {
+    font-size: 14px;
+}
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}body { padding-right: 0 !important }

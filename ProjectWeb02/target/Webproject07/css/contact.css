@@ -1,0 +1,73 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.content-contact button.btn.btn-sendinfo {
+    border-radius: unset;
+    background: white;
+    color: #5a88ca;
+    border: 1px solid #5a88ca;
+}
+
+.content-contact button.btn.btn-sendinfo:hover {
+    background: #5a88ca;
+    color: white;
+    border: 1px solid #5a88ca;
+}
+
+.content-contact input, textarea {
+    border-radius: unset !important;
+}
+
+.content-contact .contact .contact-title {
+    font-weight: 400;
+    line-height: normal;
+    font-size: 36px;
+    color: #000;
+    margin-bottom: 38px;
+}
+.content-contact .contact{
+    background: white;
+    padding: 50px;
+}
+.content-contact .contact-form{
+    background: white;
+    padding: 50px;
+    margin-bottom: 15px;
+}
+.content-contact .contact .headquarter {
+    margin-bottom: 47px;
+}
+.content-contact .contact .contact-inner {
+    margin-bottom: 38px;
+}
+.content-contact .contact .contact-inner a, .contact .contact-inner span {
+    display: block;
+    text-decoration: none;
+    font-weight: 400;
+    line-height: 25px;
+    font-size: 18px;
+    color: #000;
+}
+.content-contact .contact .contact-inner a {
+    font-size: 14px;
+}
+.content-contact .contact .contact-inner span {
+    margin-bottom: 10px;
+}
+.content-contact .contact .vinpro-store-list{
+    text-transform: uppercase;
+    border-radius: unset;
+}
+
+.content-contact .contact a.vinpro-store-list{
+    border: 1px solid #5a88ca;
+    color:  #5a88ca;
+    padding: 11px 20px;
+}
+.content-contact .contact a.vinpro-store-list:hover{
+    border: 1px solid #5a88ca;
+    color:  white;
+    background: #5a88ca;
+}
