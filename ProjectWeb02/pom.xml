@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.nlu.fit</groupId>
-    <artifactId>Webproject07</artifactId>
+    <artifactId>ProjectWeb02</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Webproject07 Maven Webapp</name>
+    <name>ProjectWeb02 Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -109,7 +109,7 @@
     </dependencies>
 
     <build>
-        <finalName>Webproject07</finalName>
+        <finalName>ProjectWeb02</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
 
