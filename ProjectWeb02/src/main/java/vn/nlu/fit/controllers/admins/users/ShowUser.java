@@ -1,8 +1,6 @@
 package vn.nlu.fit.controllers.admins.users;
 
-import vn.nlu.fit.connections.MySQLConnUtils;
-import vn.nlu.fit.models.User;
-import vn.nlu.fit.utils.Util;
+import vn.nlu.fit.connections.DBConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +24,7 @@ public class ShowUser extends HttpServlet {
 //        if (user!=null){
 //            if (user.getLevel()>2){
                 try {
-                    Connection con = MySQLConnUtils.getMySQLConnection();
+                    Connection con = DBConnection.getMySQLConnection();
                     String sql="SELECT id,Username,Email,FullName,PhoneNumber,level,Address FROM `user` WHERE level=1 OR level=2";
                     PreparedStatement pr = con.prepareStatement(sql);
                     ResultSet rs = pr.executeQuery();

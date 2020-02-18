@@ -8,7 +8,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!-- Khai báo sử dụng JSTL Core Tags -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!--Sign in-->
 <div class="sign">
@@ -223,150 +224,67 @@
         <div class="row">
             <div class="col-sm-12">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="<%=Util.fullPath("")%>">Trang chủ</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </div>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li><a href="<%=Util.fullPath("mobileList")%>">
-                                <i class="fas fa-mobile-alt"></i>
-                                Điện thoại</a>
+                        <c:forEach var="entry" items="${dynamicMenu}">
+                            <c:choose>
+                                <c:when test="${entry.key.menuName == 'Trang chủ'}">
+                                    <div class="navbar-header"><a class="navbar-brand" href="${Util.fullPath('')}">
+                                        Trang chủ</a></div>
+                                    <ul class="navbar-nav mr-auto">
+                                </c:when>
+                                <c:when test="${entry.key.menuName != 'Trang chủ' && entry.value.size() == 0}">
+                                    <li><a href="${entry.key.link}">
+                                            ${entry.key.menuName}</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="${entry.key.link}">
+                                    <i class="${entry.key.icon}"></i>
+                                    ${entry.key.menuName}</a>
 
-                                <!-- Sub menu -->
-                                <ul class="mn-sub">
+                                    <!-- Sub menu -->
+                                    <ul class="mn-sub ${entry.key.menuBackground}">
                                     <li class="phone-bg">
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Apple</a></li>
-                                            <li><a href="">Samsung</a></li>
-                                            <li><a href="">Oppo</a></li>
-                                            <li><a href="">Xiaomi</a></li>
-                                        </ul>
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Vivo</a></li>
-                                            <li><a href="">Realme</a></li>
-                                            <li><a href="">Huawei</a></li>
-                                            <li><a href="">Nokia</a></li>
-                                        </ul>
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Mobell</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="phone-bg" class="hangCC">
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Hàng cao cấp</a></li>
-                                            <li><a href="">Hàng trung cấp</a></li>
-                                            <li><a href="">Hàng phổ thông</a></li>
-                                        </ul>
-                                    </li>
-                                </ul> <!-- End sub menu -->
-
-                            </li>
-                            <li><a href="<%=Util.fullPath("tabletList")%>">
-                                <i class="fas fa-tablet-alt"></i>
-                                Tablet</a>
-
-                                <!-- Sub menu -->
-                                <ul class="mn-sub tablet">
-                                    <li class="phone-bg">
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Apple</a></li>
-                                            <li><a href="">Samsung</a></li>
-                                            <li><a href="">Oppo</a></li>
-                                            <li><a href="">Xiaomi</a></li>
-                                        </ul>
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Vivo</a></li>
-                                            <li><a href="">Realme</a></li>
-                                            <li><a href="">Huawei</a></li>
-                                            <li><a href="">Nokia</a></li>
-                                        </ul>
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Mobell</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="phone-bg" class="hangCC">
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Hàng cao cấp</a></li>
-                                            <li><a href="">Hàng trung cấp</a></li>
-                                            <li><a href="">Hàng phổ thông</a></li>
-                                        </ul>
-                                    </li>
-                                </ul> <!-- End sub menu -->
-
-                            </li>
-                            <li><a href="<%=Util.fullPath("laptopList")%>">
-                                <i class="fas fa-laptop"></i>
-                                Laptop</a>
-                                <!-- Sub menu -->
-                                <ul class="mn-sub laptop">
-                                    <li class="phone-bg">
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Apple</a></li>
-                                            <li><a href="">Samsung</a></li>
-                                            <li><a href="">Oppo</a></li>
-                                            <li><a href="">Xiaomi</a></li>
-                                        </ul>
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Vivo</a></li>
-                                            <li><a href="">Realme</a></li>
-                                            <li><a href="">Huawei</a></li>
-                                            <li><a href="">Nokia</a></li>
-                                        </ul>
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Mobell</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="phone-bg" class="hangCC">
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Hàng cao cấp</a></li>
-                                            <li><a href="">Hàng trung cấp</a></li>
-                                            <li><a href="">Hàng phổ thông</a></li>
-                                        </ul>
-                                    </li>
-                                </ul> <!-- End sub menu -->
-
-                            </li>
-                            <li><a href="<%=Util.fullPath("phuKienList")%>">
-                                <i class="fas fa-headphones-alt"></i>
-                                Phụ kiện</a>
-                                <!-- Sub menu -->
-                                <ul class="mn-sub phuKien">
-                                    <li class="phone-bg">
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Apple</a></li>
-                                            <li><a href="">Samsung</a></li>
-                                            <li><a href="">Oppo</a></li>
-                                            <li><a href="">Xiaomi</a></li>
-                                        </ul>
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Vivo</a></li>
-                                            <li><a href="">Realme</a></li>
-                                            <li><a href="">Huawei</a></li>
-                                            <li><a href="">Nokia</a></li>
-                                        </ul>
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Mobell</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="phone-bg" class="hangCC">
-                                        <ul class="clearlist menu-dt">
-                                            <li><a href="">Hàng cao cấp</a></li>
-                                            <li><a href="">Hàng trung cấp</a></li>
-                                            <li><a href="">Hàng phổ thông</a></li>
-                                        </ul>
-                                    </li>
-                                </ul> <!-- End sub menu -->
-
-                            </li>
-                            <li><a href="about.jsp">
-                                Giới thiệu</a></li>
-                            <li><a href="contact.jsp">
-                                Liên hệ</a></li>
+                                    <c:set var="count" value="${0}"></c:set>
+                                    <c:forEach var="sub" items="${entry.value}" varStatus="status">
+                                        <c:choose>
+                                            <c:when test="${status.last && count == 0}">
+                                                <ul>
+                                                    <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                </ul>
+                                                </li>
+                                                </ul> <!-- End sub menu -->
+                                                </li>
+                                            </c:when>
+                                            <c:when test="${status.last}">
+                                                <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                </ul>
+                                                </li>
+                                                </ul> <!-- End sub menu -->
+                                                </li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:choose>
+                                                    <c:when test="${count == 0}">
+                                                        <ul class="clearlist menu-dt">
+                                                        <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                        <c:set var="count" value="${count + 1}"></c:set>
+                                                    </c:when>
+                                                    <c:when test="${count < 3}">
+                                                        <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                        <c:set var="count" value="${count + 1}"></c:set>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                        </ul>
+                                                        <c:set var="count" value="${0}"></c:set>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
                         </ul>
                     </div>
                 </nav>

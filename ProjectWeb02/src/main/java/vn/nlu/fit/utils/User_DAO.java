@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import vn.nlu.fit.connections.MyConnection_DB;
-import vn.nlu.fit.connections.MySQLConnUtils;
-import vn.nlu.fit.models.User;
+import vn.nlu.fit.connections.DBConnection;
 import vn.nlu.fit.models.User;
 
 public class User_DAO implements Object_DAO {
@@ -15,7 +13,7 @@ public class User_DAO implements Object_DAO {
     public boolean addUser(Object obj) {
         User user = (User) obj;
         try {
-            Connection con = MySQLConnUtils.getMySQLConnection();
+            Connection con = DBConnection.getMySQLConnection();
             String sql = "INSERT INTO `user`( `Username`, `Password`, `Email`, `FullName`, `PhoneNumber`, `level`, `Address`) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement pr = con.prepareStatement(sql);
 
@@ -39,7 +37,7 @@ public class User_DAO implements Object_DAO {
     public boolean editUser(Object obj) {
         User user = (User) obj;
         try {
-            Connection con = MySQLConnUtils.getMySQLConnection();
+            Connection con = DBConnection.getMySQLConnection();
             String sql = "UPDATE `user` SET `Username`=?, `Password`=?, `Email`=?, `FullName`=?, `PhoneNumber`=?, `level`=?, `Address`=? WHERE id=?";
             PreparedStatement pr = con.prepareStatement(sql);
             pr.setString(1, user.getUsername());
@@ -63,7 +61,7 @@ public class User_DAO implements Object_DAO {
     @Override
     public boolean removeUser(int id) {
         try {
-            Connection con = MySQLConnUtils.getMySQLConnection();
+            Connection con = DBConnection.getMySQLConnection();
             String sql = "DELETE FROM `user` WHERE id=?";
             PreparedStatement pr = con.prepareStatement(sql);
             pr.setInt(1, id);
@@ -79,7 +77,7 @@ public class User_DAO implements Object_DAO {
     public User takeProfileUer(String username) {
         User user;
         try {
-            Connection con = MyConnection_DB.getConnection();
+            Connection con = DBConnection.getMySQLConnection();
 
             String sql = "SELECT * FROM user where username=?";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -114,7 +112,7 @@ public class User_DAO implements Object_DAO {
     public boolean checkUser(String username, String password) {
 
         try {
-            Connection con = MyConnection_DB.getConnection();
+            Connection con = DBConnection.getMySQLConnection();
             String sql = "SELECT * FROM user where username= ? and password= ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1,username);

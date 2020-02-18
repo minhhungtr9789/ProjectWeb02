@@ -1,8 +1,10 @@
 package vn.nlu.fit.controllers.clients;
 
 
+import vn.nlu.fit.models.MenuItem;
 import vn.nlu.fit.models.Product;
 import vn.nlu.fit.utils.DBUtils;
+import vn.nlu.fit.utils.MenuDAO;
 import vn.nlu.fit.utils.Util;
 
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -27,6 +30,13 @@ public class IndexServlet extends HttpServlet {
 
         String errorString = null;
         List<Product> list = null;
+
+        HttpSession session = request.getSession();
+        session.setAttribute("dynamicMenu", MenuDAO.getDynamicMenu());
+
+        MenuItem item = new MenuItem();
+        item.setLink("contact.jsp");
+        request.setAttribute("item", item);
 
         try {
             list = DBUtils.queryProduct("SELECT * FROM product WHERE CatalogId IN(1,5) AND `Status` = 1\n" +

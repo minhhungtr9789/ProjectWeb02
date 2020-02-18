@@ -1,6 +1,6 @@
 package vn.nlu.fit.utils;
 
-import vn.nlu.fit.connections.MySQLConnUtils;
+import vn.nlu.fit.connections.DBConnection;
 import vn.nlu.fit.models.*;
 
 import java.sql.*;
@@ -14,7 +14,7 @@ public class DBUtils {
 
     public static void addUser(User userName) throws SQLException {
 
-        Connection con = MySQLConnUtils.getMySQLConnection();
+        Connection con = DBConnection.getMySQLConnection();
         String sql = "INSERT INTO `user` ( `user`.Username, `user`.Email, `user`.FullName, `user`.`Password` )\n" +
                 "VALUES\n" +
                 "\t(?,?,?,?)";
@@ -27,7 +27,7 @@ public class DBUtils {
     }
 
     public static boolean checkUserName(String userName) throws SQLException {
-        Connection con = MySQLConnUtils.getMySQLConnection();
+        Connection con = DBConnection.getMySQLConnection();
         String sql = "SELECT * FROM `user` WHERE  `user`.Username=?";
         PreparedStatement pr = con.prepareStatement(sql);
         pr.setString(1, userName);
@@ -38,7 +38,7 @@ public class DBUtils {
     public static User findUser(int id) {
         try {
             User u = new User();
-            Connection con = MySQLConnUtils.getMySQLConnection();
+            Connection con = DBConnection.getMySQLConnection();
             String sql = "SELECT id,Username,Email,FullName,PhoneNumber,level,Address FROM `user` WHERE id=?";
             PreparedStatement pr = con.prepareStatement(sql);
             pr.setInt(1, id);
@@ -64,7 +64,7 @@ public class DBUtils {
     public static int getMountAcc() {
         int i = 0;
         try {
-            Connection con = MySQLConnUtils.getMySQLConnection();
+            Connection con = DBConnection.getMySQLConnection();
             String sql = "SELECT * FROM `user`";
             PreparedStatement pr = con.prepareStatement(sql);
             ResultSet rs = pr.executeQuery();
@@ -81,7 +81,7 @@ public class DBUtils {
     public static int getRowAcc() {
         int i = 0;
         try {
-            Connection con = MySQLConnUtils.getMySQLConnection();
+            Connection con = DBConnection.getMySQLConnection();
             String sql = "SELECT * FROM `user` WHERE level=1 OR level=2";
             PreparedStatement pr = con.prepareStatement(sql);
             ResultSet rs = pr.executeQuery();
@@ -98,7 +98,7 @@ public class DBUtils {
 
     public static List<Product> queryProduct(String sql) throws SQLException, ClassNotFoundException {
 
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         ResultSet rs = pstm.executeQuery();
@@ -112,7 +112,7 @@ public class DBUtils {
 
 
     public static List<Product> queryMobileList(int page) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
         String sql = "SELECT * FROM product WHERE (CatalogId=1 OR CatalogId=5) AND `Status` = 1\n" +
                 "ORDER BY `Top` ASC LIMIT ?," + quantityPerPage;
         PreparedStatement pr = conn.prepareStatement(sql);
@@ -128,7 +128,7 @@ public class DBUtils {
     }
 
     public static int numberOfMobilePage() throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
         String sql = "SELECT COUNT(`Id`) FROM product WHERE (CatalogId=1 OR CatalogId=5) AND `Status` = 1\n";
         PreparedStatement pr = conn.prepareStatement(sql);
 
@@ -145,7 +145,7 @@ public class DBUtils {
 
     public static List<Product> queryProduct() throws SQLException, ClassNotFoundException {
         String sql = "SELECT* FROM product";
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         ResultSet rs = pstm.executeQuery();
@@ -159,7 +159,7 @@ public class DBUtils {
 
     public static ArrayList<Catalog> queryCatalog() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM catalog";
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         ResultSet rs = pstm.executeQuery();
@@ -181,7 +181,7 @@ public class DBUtils {
 
     public static ArrayList<Brand> queryBrand() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM brand";
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         ResultSet rs = pstm.executeQuery();
@@ -202,7 +202,7 @@ public class DBUtils {
     }
 
     public static Product findProduct(String code, int status) throws SQLException, ClassNotFoundException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "SELECT * FROM product WHERE ProductCode=? and status=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -218,7 +218,7 @@ public class DBUtils {
     }
 
     public static Product findProduct(String code) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "SELECT * FROM product WHERE ProductCode=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -233,7 +233,7 @@ public class DBUtils {
     }
 
     public static boolean findCatalog(String code) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "SELECT * FROM catalog WHERE catalog.`Name`= ?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -244,7 +244,7 @@ public class DBUtils {
     }
 
     public static Catalog findCatalog(int code) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "SELECT * FROM catalog WHERE catalog.`CatalogId`= ?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -267,7 +267,7 @@ public class DBUtils {
     }
 
     public static void updateProduct(Product product, int id) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
         String sql = "UPDATE product\n" +
                 "SET \n" +
                 "CatalogId=?,\n" +
@@ -309,7 +309,7 @@ public class DBUtils {
     }
 
     public static void updateCatalog(Catalog catalog, int catalogId) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "UPDATE catalog \n" +
                 "SET \n" +
@@ -335,7 +335,7 @@ public class DBUtils {
     }
 
     public static void insertProduct(Product product) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
         String sql = "Insert into product(CatalogId,ProductCode,Name,\n" +
                 "SettingInfo,Description,PromotionText,Brand,Price,\n" +
                 "PromotionPrice,ImageList,Quantity,Waranty,DateCreated,Status) \n" +
@@ -364,7 +364,7 @@ public class DBUtils {
     }
 
     public static void insertCatalog(Catalog c) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
         String sql;
         PreparedStatement pstm;
         if (c.getParentId() == 0) {
@@ -386,7 +386,7 @@ public class DBUtils {
     }
 
     public static void deleteProduct(String code) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "Delete From product where product.ProductCode= ?";
 
@@ -401,7 +401,7 @@ public class DBUtils {
     }
 
     public static void deleteCatalog(String code) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "Delete From catalog where catalog.CatalogId= ?";
 
@@ -416,7 +416,7 @@ public class DBUtils {
     }
 
     public static void deleteBrand(String code) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "Delete From brand where brand.Id= ?";
 
@@ -431,7 +431,7 @@ public class DBUtils {
     }
 
     public static void findCart(User user) throws SQLException, ClassNotFoundException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "SELECT o.UserId, o.OrderId, p.*, i.ItemQuantity, i.`ItemStatus` \n" +
                 "FROM order_item i\n" +
@@ -495,7 +495,7 @@ public class DBUtils {
     }
 
     public static void updateCart(int cartId, int productId, int quantity) throws SQLException, ClassNotFoundException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "UPDATE order_item SET ItemQuantity = ? WHERE OrderId=? AND ProductId = ?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -510,7 +510,7 @@ public class DBUtils {
     }
 
     public static void insertCartItem(int cartId, int productId, int quantity, int status) throws SQLException, ClassNotFoundException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "INSERT INTO order_item (OrderId, ProductId, ItemQuantity, ItemStatus) VALUES (?, ?, ?, ? );";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -526,7 +526,7 @@ public class DBUtils {
     }
 
     public static void deleteItemOCart(int cartId, int productId) throws SQLException, ClassNotFoundException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "DELETE FROM order_item WHERE OrderId= ? AND ProductId = ?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -541,7 +541,7 @@ public class DBUtils {
     }
 
     public static void updateCartItemStatus(int cartId, int productId, int statusCartItem) throws SQLException, ClassNotFoundException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         if (productId == -1) {
             String sql = "UPDATE order_item SET ItemStatus = ? WHERE OrderId=?";
@@ -567,7 +567,7 @@ public class DBUtils {
     }
 
     public static void updateQuantityItem(int cartId, int productId, int quantity) throws SQLException, ClassNotFoundException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
         String sql = "UPDATE order_item SET ItemQuantity = ? WHERE OrderId=? AND ProductId = ?";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, quantity);
@@ -581,7 +581,7 @@ public class DBUtils {
     }
 
     public static ArrayList<Product> searchProduct(String keys) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         StringBuilder sql = new StringBuilder("SELECT * FROM product WHERE product.`Name` LIKE ?");
         String[] listkeys = keys.trim().split(" ");
@@ -611,7 +611,7 @@ public class DBUtils {
     }
 
     public static void changeStatusProduct(String code, int status) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
         String sql = "UPDATE product SET product.`Status` =? WHERE product.ProductCode=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, status);
@@ -624,7 +624,7 @@ public class DBUtils {
     }
 
     public static ArrayList<Brand> loadBrand() throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "SELECT * FROM brand";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -646,7 +646,7 @@ public class DBUtils {
     }
 
     public static ArrayList<Catalog> loadCataLog() throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "SELECT * FROM catalog";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -668,7 +668,7 @@ public class DBUtils {
     }
 
     public static ArrayList<Warranty> loadWarranty() throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "SELECT * FROM warranty";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -692,7 +692,7 @@ public class DBUtils {
 
 
         String sql = "SELECT `order`.OrderId ,`user`.FullName,`order`.OrderDate,`order`.`Status` FROM `order` INNER JOIN `user` ON `order`.UserId=`user`.Id";
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         ResultSet rs = pstm.executeQuery();
@@ -703,7 +703,7 @@ public class DBUtils {
             order.setUser(rs.getString(2));
             order.setStatus(rs.getInt(4));
             String orderitem = "SELECT * FROM order_item WHERE OrderId=?";
-            Connection conn1 = MySQLConnUtils.getMySQLConnection();
+            Connection conn1 = DBConnection.getMySQLConnection();
 
             PreparedStatement pstm1 = conn1.prepareStatement(orderitem);
             pstm1.setInt(1, rs.getInt(1));
@@ -729,7 +729,7 @@ public class DBUtils {
 
         String sql = "SELECT `order`.OrderId ,`user`.FullName,`order`.OrderDate,`order`.`Status` FROM `order` INNER JOIN `user` ON `order`.UserId=`user`.Id\n" +
                 "WHERE `user`.Id=?";
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, id);
@@ -741,7 +741,7 @@ public class DBUtils {
             order.setUser(rs.getString(2));
             order.setStatus(rs.getInt(4));
             String orderitem = "SELECT * FROM order_item WHERE OrderId=?";
-            Connection conn1 = MySQLConnUtils.getMySQLConnection();
+            Connection conn1 = DBConnection.getMySQLConnection();
 
             PreparedStatement pstm1 = conn1.prepareStatement(orderitem);
             pstm1.setInt(1, rs.getInt(1));
@@ -762,7 +762,7 @@ public class DBUtils {
     }
 
     public static Product findIdProduct(int id) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "SELECT * FROM product WHERE Id=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -777,7 +777,7 @@ public class DBUtils {
     }
 
     public static void setDelivery(int i, int id) throws SQLException {
-        Connection conn = MySQLConnUtils.getMySQLConnection();
+        Connection conn = DBConnection.getMySQLConnection();
 
         String sql = "UPDATE `order` SET `order`.`Status`=? WHERE OrderId=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -789,7 +789,7 @@ public class DBUtils {
     public static int getIdUser(String s) {
         int i = 0;
         try {
-            Connection con = MySQLConnUtils.getMySQLConnection();
+            Connection con = DBConnection.getMySQLConnection();
             String sql = "SELECT `user`.Id FROM `user` WHERE Username=?";
             PreparedStatement pr = con.prepareStatement(sql);
             pr.setString(1, s);

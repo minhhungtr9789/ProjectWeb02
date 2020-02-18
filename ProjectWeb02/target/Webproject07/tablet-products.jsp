@@ -458,10 +458,10 @@
             data: { // Danh sách các thuộc tính sẽ gửi đi
                 brand, price
             },
-            // datatype: 'json',
-            // headers: {
-            //     Accept: "application/json; charset=utf-8",
-            // },
+            datatype: 'json',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+            },
             error: function () {
                 alert("error");
             },

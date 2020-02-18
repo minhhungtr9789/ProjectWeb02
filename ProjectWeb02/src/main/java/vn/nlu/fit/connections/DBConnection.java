@@ -1,10 +1,9 @@
 package vn.nlu.fit.connections;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class MyConnection_DB {
+public class DBConnection {
+
     private static String USER = "root";
     private static String PASS = "";
 
@@ -12,29 +11,19 @@ public class MyConnection_DB {
     private static String dbName = "webproject";
     private static String connectionURL = "jdbc:mysql://" + hostName + ":3306/" + dbName;
 
-    public static Connection getConnection() {
-
-        final String url = "jdbc:mysql://localhost:3306/demo?useSSL=false&useUnicode=true&characterEncoding=utf-8";
-        final String user = "root";
-        final String password = "";
+    public static Connection getMySQLConnection() {
+        Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
-                return DriverManager.getConnection(connectionURL, user, password);
-
+                conn = DriverManager.getConnection(connectionURL, USER, PASS);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return null;
+
+        return conn;
     }
-
-
-    public static void main(String[] args) throws Exception {
-
-
-    }
-
 }
