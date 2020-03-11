@@ -161,11 +161,11 @@
                                             </div>
                                             <%
                                                 ArrayList<KeyValueOfPrices> prices = new ArrayList<>();
-                                                prices.add(new KeyValueOfPrices("0-2000000", "Dưới 2 triệu"));
-                                                prices.add(new KeyValueOfPrices("2000000-4000000", "Từ 2 - 4 triệu"));
-                                                prices.add(new KeyValueOfPrices("4000000-7000000", "Từ 4 - 7 triệu"));
-                                                prices.add(new KeyValueOfPrices("7000000-13000000", "Từ 7 - 13 triệu"));
-                                                prices.add(new KeyValueOfPrices("13000000-200000000", "Trên 13 triệu"));
+                                                prices.add(new KeyValueOfPrices("0-2", "Dưới 2 triệu"));
+                                                prices.add(new KeyValueOfPrices("2-4", "Từ 2 - 4 triệu"));
+                                                prices.add(new KeyValueOfPrices("4-7", "Từ 4 - 7 triệu"));
+                                                prices.add(new KeyValueOfPrices("7-13", "Từ 7 - 13 triệu"));
+                                                prices.add(new KeyValueOfPrices("13-200", "Trên 13 triệu"));
                                             %>
                                             <%
                                                 for (KeyValueOfPrices st : prices) {
@@ -205,28 +205,25 @@
                     <div class="resultFilter-swrap">
                         <div class="sectionTitle">
                             <a href="#"><h2><%=catalogName%> nổi bật nhất</h2></a>
-                            <div id="sort" class="dropdown ">
+                            <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" data-value="noi-bat-nhat" aria-haspopup="true" aria-expanded="false">
-                                    Sắp xếp theo: <span class="sortText">Nổi bật nhất</span> <i class="icdt"></i>
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Sắp xếp theo:<span class="sortText">Giá cao đến thấp</span> <i class="icdt"></i>
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" data-value="noi-bat-nhat" href="javascript:;">
-                                        <i class="fas fa-check"></i>Nổi bật nhất</a>
-                                    <a class="dropdown-item" data-value="gia-cao-den-thap" href="javascript:;">Giá cao đến thấp</a>
-                                    <a class="dropdown-item" data-value="gia-thap-den-cao" href="javascript:;">
-                                        Giá thấp đến cao
-                                    </a>
+                                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </div>
                         </div>
                         <div class="choosedfilter">
                             <div class="content">
                                 <strong>LỌC THEO: </strong>
-                                <span class="btn btn-primary">Từ 2 - 4 triệu
+                                <span   class="btn btn-primary">Từ 2 - 4 triệu
                                     <i class="fas fa-times"></i>
                                 </span>
-                                <span class="btn btn-danger">Xóa tất cả
+                                <span   class="btn btn-danger">Xóa tất cả
                                     <i class="fas fa-times"></i>
                                 </span>
                             </div>
@@ -274,28 +271,28 @@
                             </div>
                         </div>
                         <!-- Phân trang  -->
-                        <div id="pagination" class="pagination">
+                        <div class="pagination">
                             <div class="container bg_white">
                                 <nav aria-label="Page navigation example">
-                                    <ul class="list-page pagination  justify-content-center">
+                                    <ul class="pagination  justify-content-center">
                                         <%if (numberOfPages == 1) {%>
-                                        <li class="page-item active"><a class="page-link" onclick="items(this)" href="javascript:;">1</a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                         <%} else {%>
-                                        <li id="btn_prev" class="page-item<%=pageProduct==1?" disabled":""%>">
-                                            <a class="page-link" onclick="prevPage()"  href="javascript:;"
+                                        <li class="page-item <%=pageProduct==1?"disabled":""%>">
+                                            <a class="page-link" href="<%=Util.fullPath(servletPath+"?page="+( pageProduct - 1))%>"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">Trước</span>
                                             </a>
                                         </li>
                                         <%
                                             for (int i = 0; i < numberOfPages; i++) {%>
-                                        <li class="page-item item <%=pageProduct==i+1?" active":""%>">
-                                            <a class="page-link" onclick="items(this)" href="javascript:;"><%=i + 1%>
+                                        <li class="page-item <%=pageProduct==i+1?"active":""%>">
+                                            <a class="page-link" href="<%=Util.fullPath(servletPath+"?page="+(i+1))%>"><%=i + 1%>
                                             </a>
                                         </li>
                                         <% }%>
-                                        <li id="btn_next" class="page-item<%=pageProduct==numberOfPages?" disabled":""%>">
-                                            <a class="page-link" onclick="nextPage()"  href="javascript:;"
+                                        <li class="page-item <%=pageProduct==numberOfPages?"disabled":""%>">
+                                            <a class="page-link" href="<%=Util.fullPath(servletPath+"?page="+(pageProduct + 1))%>"
                                                aria-label="Next">
                                                 <span aria-hidden="true">Tiếp</span>
                                             </a>
@@ -307,13 +304,6 @@
                         </div><!-- End phân trang  -->
                         <div class="loaderWrap" style="display: none">
                             <div class="loader"></div>
-                        </div>
-                        <div class="nullResult" style="display: none">
-                            <div class="container" style="padding: 50px;text-align: center;">
-                                <img src="img/noti-search.png" alt="">
-                                <p class="fs-senull-l2">Rất tiếc chúng tôi không tìm thấy kết quả theo yêu cầu của bạn
-                                    Vui lòng thử lại .</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -404,6 +394,7 @@
     $(".card").each(function () {
         var groupCheckListID = $(this).find(".check-all").find('input').data('id');
         var groupCheckList = $('#' + groupCheckListID).find('.checkbox');
+        console.log("?")
         if (allUnChecked(groupCheckList)) {
             $('#' + groupCheckListID).find(".check-all").find('input').prop("checked", true);
         } else {

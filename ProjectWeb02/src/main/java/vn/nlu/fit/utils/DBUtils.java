@@ -127,6 +127,79 @@ public class DBUtils {
         return list;
     }
 
+    public static List<Product> queryMobileList(String brand, String price, String sort, int page) throws SQLException {
+        Connection conn = DBConnection.getMySQLConnection();
+        List<Product> list = new ArrayList<>();
+        // String brandQuery = Util.convertArrayToString(brand);
+        String brandQuery = brand;
+        String selectSQL = concatSQLOfMobile("SELECT", brand, price, sort, quantityPerPage);
+        System.out.println(selectSQL);
+        PreparedStatement pr = conn.prepareStatement(selectSQL);
+
+        pr.setInt(1, (page - 1) * quantityPerPage);
+
+        ResultSet rs = pr.executeQuery();
+        while (rs.next()) {
+            Product product = setProductData(rs);
+            list.add(product);
+        }
+        System.out.println("list resultset " + list.size());
+        return list;
+    }
+
+    private static String concatSQLOfMobile(String type, String brand, String price, String sort, int quantityPerPage) {
+        StringBuilder sql = new StringBuilder();
+        if ("SELECT".equals(type)) {
+            sql = new StringBuilder("SELECT * FROM product " +
+                    "WHERE (CatalogId=1 OR CatalogId=5) AND Status = 1");
+        }
+        if ("COUNT".equals(type)) {
+            sql = new StringBuilder("SELECT COUNT(`Id`) FROM product " +
+                    "WHERE (CatalogId=1 OR CatalogId=5) AND Status = 1");
+        }
+        if (brand != null && brand.length() != 0) {
+            sql.append(" AND Brand in (").append(brand).append(")");
+        }
+        if (price != null && price.length() != 0) {
+            sql.append(" AND(");
+            String[] arrPrice = price.split(",");
+            for (int i = 0; i < arrPrice.length; i++) {
+                String[] temp = arrPrice[i].split("-");
+                if (i < arrPrice.length - 1) {
+                    sql.append(" PromotionPrice between ").append(temp[0]).append(" AND ").append(temp[1]).append(" Or");
+                } else {
+                    sql.append(" PromotionPrice between ").append(temp[0]).append(" AND ").append(temp[1]).append(")");
+                }
+            }
+        }
+        if ("gia-thap-den-cao".equals(sort)) sql.append(" ORDER BY `PromotionPrice` ASC");
+        if ("gia-cao-den-thap".equals(sort)) sql.append(" ORDER BY `PromotionPrice` DESC");
+        if ("noi-bat-nhat".equals(sort)) sql.append(" ORDER BY `Top` ASC");
+
+        if ("SELECT".equals(type)) {
+            sql.append(" LIMIT ?,").append(quantityPerPage);
+        }
+
+        return sql.toString();
+    }
+
+    public static int numberOfMobilePage(String brand, String price, String sort) throws SQLException {
+        Connection conn = DBConnection.getMySQLConnection();
+        String sql = concatSQLOfMobile("COUNT", brand, price, sort, quantityPerPage);
+        System.out.println(sql);
+        PreparedStatement pr = conn.prepareStatement(sql);
+
+        ResultSet rs = pr.executeQuery();
+        rs.next();
+        int total = rs.getInt(1);
+        int numberOfPages;
+        if (total % quantityPerPage == 0)
+            numberOfPages = total / quantityPerPage;
+        else
+            numberOfPages = total / quantityPerPage + 1;
+        return numberOfPages;
+    }
+
     public static int numberOfMobilePage() throws SQLException {
         Connection conn = DBConnection.getMySQLConnection();
         String sql = "SELECT COUNT(`Id`) FROM product WHERE (CatalogId=1 OR CatalogId=5) AND `Status` = 1\n";
@@ -143,6 +216,7 @@ public class DBUtils {
         return numberOfPages;
     }
 
+    //    private static String
     public static List<Product> queryProduct() throws SQLException, ClassNotFoundException {
         String sql = "SELECT* FROM product";
         Connection conn = DBConnection.getMySQLConnection();

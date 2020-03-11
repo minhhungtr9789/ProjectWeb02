@@ -131,168 +131,222 @@
 </div>
 <!--End sign up-->
 
-<div class="header-area">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-right">
-                <div class="user-menu">
-                    <ul>
-                        <%
-                            User user = (User) session.getAttribute("user");
-                            if (user != null) {
-                        %>
-                        <li><a href="account.jsp"><i class="fa fa-user"></i>Tài khoản: <%=user.getUsername()%>
-                        </a></li>
-                        <li><a href="" onclick="submitLogout()"><i class="fas fa-user-plus"></i>
-                            Đăng xuất</a></li>
-                        <%} else {%>
-
-                        <li><a href="" data-toggle="modal"
-                               data-target="#sign-in-model"><i class="fa fa-user"></i>Đăng
-                            nhập</a></li>
-
-                        <li><a href="" data-toggle="modal"
-                               data-target="#sign-up-model"><i class="fas fa-user-plus"></i>
-                            Đăng ký</a></li>
-                        <%}%>
-
-                        <li><a href="<%=Util.fullPath("CartServlet?action=view")%>"><i class="fa fa-shopping-cart"></i>Giỏ
-                            hàng</a></li>
-
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- End header area -->
-
-<div class="site-branding-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-2">
-                <div class="logo">
-                    <h1><a href="<%=Util.fullPath("")%>"><img src="img/logo.png" alt="Trang chủ"></a></h1>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="searchBar">
-                    <form class="form-inline" action="SearchPageServlet" method="get">
-                        <input required name="keys" class="form-control mr-sm-2 searchInput" type="text"
-                               placeholder="Bạn tìm gì..." oninput="this.setCustomValidity('')"
-                               aria-label="Search" onkeyup="showResult()"
-                               oninvalid="this.setCustomValidity('Bạn chưa nhập từ khóa tìm kiếm') ">
-                        <button class="btn btn-primary my-2 my-sm-0" type="submit"><i
-                                class="fa fa-search"></i></button>
-
-                        <!--Search result-->
-                        <div class="fs-sresult" style="display: none">
-                            <div class="fs-sremain">
-                                <ul style="display: block;">
-                                </ul>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="shopping-item">
-                    <a href="<%=Util.fullPath("CartServlet?action=view")%>"> <i
-                            class="fa fa-shopping-cart"></i>
-                        <%
-                            int count;
-                            if (user != null) {
-                                count = user.getCart().totalItems();%>
-                        <span class="product-count">
-                                    <%=count%>
-                                </span>
-                        <%}%>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End site branding area -->
-
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
-<div class="mainmenu-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <c:forEach var="entry" items="${dynamicMenu}">
-                            <c:choose>
-                                <c:when test="${entry.key.menuName == 'Trang chủ'}">
-                                    <div class="navbar-header"><a class="navbar-brand" href="${Util.fullPath('')}">
-                                        Trang chủ</a></div>
-                                    <ul class="navbar-nav mr-auto">
-                                </c:when>
-                                <c:when test="${entry.key.menuName != 'Trang chủ' && entry.value.size() == 0}">
-                                    <li><a href="${entry.key.link}">
-                                            ${entry.key.menuName}</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="${entry.key.link}">
-                                    <i class="${entry.key.icon}"></i>
-                                    ${entry.key.menuName}</a>
 
-                                    <!-- Sub menu -->
-                                    <ul class="mn-sub ${entry.key.menuBackground}">
-                                    <li class="phone-bg">
-                                    <c:set var="count" value="${0}"></c:set>
-                                    <c:forEach var="sub" items="${entry.value}" varStatus="status">
-                                        <c:choose>
-                                            <c:when test="${status.last && count == 0}">
-                                                <ul>
-                                                    <li><a href="${sub.link}">${sub.menuName}</a></li>
-                                                </ul>
-                                                </li>
-                                                </ul> <!-- End sub menu -->
-                                                </li>
-                                            </c:when>
-                                            <c:when test="${status.last}">
-                                                <li><a href="${sub.link}">${sub.menuName}</a></li>
-                                                </ul>
-                                                </li>
-                                                </ul> <!-- End sub menu -->
-                                                </li>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:choose>
-                                                    <c:when test="${count == 0}">
-                                                        <ul class="clearlist menu-dt">
-                                                        <li><a href="${sub.link}">${sub.menuName}</a></li>
-                                                        <c:set var="count" value="${count + 1}"></c:set>
-                                                    </c:when>
-                                                    <c:when test="${count < 3}">
-                                                        <li><a href="${sub.link}">${sub.menuName}</a></li>
-                                                        <c:set var="count" value="${count + 1}"></c:set>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <li><a href="${sub.link}">${sub.menuName}</a></li>
-                                                        </ul>
-                                                        <c:set var="count" value="${0}"></c:set>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                        </ul>
+<div id="header" class="header">
+    <div class="header-wrap">
+        <div class="header-area">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-right p-0">
+                        <div class="user-menu">
+                            <ul>
+                                <%
+                                    User user = (User) session.getAttribute("user");
+                                    if (user != null) {
+                                %>
+                                <li><a href="account.jsp"><i class="fa fa-user"></i>Tài khoản: <%=user.getUsername()%>
+                                </a></li>
+                                <li><a href="" onclick="submitLogout()"><i class="fas fa-user-plus"></i>
+                                    Đăng xuất</a></li>
+                                <%} else {%>
+
+                                <li><a href="" data-toggle="modal"
+                                       data-target="#sign-in-model"><i class="fa fa-user"></i>Đăng
+                                    nhập</a></li>
+
+                                <li><a href="" data-toggle="modal"
+                                       data-target="#sign-up-model"><i class="fas fa-user-plus"></i>
+                                    Đăng ký</a></li>
+                                <%}%>
+
+                                <li><a href="<%=Util.fullPath("CartServlet?action=view")%>"><i
+                                        class="fa fa-shopping-cart"></i>Giỏ
+                                    hàng</a></li>
+
+                            </ul>
+                        </div>
                     </div>
-                </nav>
+
+                </div>
             </div>
         </div>
+        <!-- End header area -->
+
+        <div class="site-branding-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2 pl-0">
+                        <div class="logo">
+                            <h1><a href="<%=Util.fullPath("")%>"><img src="img/logo.png" alt="Trang chủ"></a></h1>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="searchBar">
+                            <form class="form-inline" action="SearchPageServlet" method="get">
+                                <input required name="keys" class="form-control mr-sm-2 searchInput" type="text"
+                                       placeholder="Bạn tìm gì..." oninput="this.setCustomValidity('')"
+                                       aria-label="Search" onkeyup="showResult()"
+                                       oninvalid="this.setCustomValidity('Bạn chưa nhập từ khóa tìm kiếm') ">
+                                <button class="btn btn-primary my-2 my-sm-0" type="submit"><i
+                                        class="fa fa-search"></i></button>
+
+                                <!--Search result-->
+                                <div class="fs-sresult" style="display: none">
+                                    <div class="fs-sremain">
+                                        <ul style="display: block;">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 pr-0">
+                        <div class="shopping-item">
+                            <a href="<%=Util.fullPath("CartServlet?action=view")%>"> <i
+                                    class="fa fa-shopping-cart"></i>
+                                <%
+                                    int count;
+                                    if (user != null) {
+                                        count = user.getCart().totalItems();%>
+                                <span class="product-count">
+                                    <%=count%>
+                                </span>
+                                <%}%>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End site branding area -->
+
+        <%-- menu--%>
+        <div class="mainmenu-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <c:forEach var="entry" items="${dynamicMenu}">
+                                    <c:choose>
+                                        <c:when test="${entry.key.menuName == 'Trang chủ'}">
+                                            <div class="navbar-header"><a class="navbar-brand"
+                                                                          href="${Util.fullPath('')}">
+                                                Trang chủ</a></div>
+                                            <ul class="navbar-nav mr-auto">
+                                        </c:when>
+                                        <c:when test="${entry.key.menuName != 'Trang chủ' && entry.value.size() == 0}">
+                                            <li><a href="${entry.key.link}">
+                                                    ${entry.key.menuName}</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li><a href="${entry.key.link}">
+                                            <i class="${entry.key.icon}"></i>
+                                            ${entry.key.menuName}</a>
+
+                                            <!-- Sub menu -->
+                                            <ul class="mn-sub ${entry.key.menuBackground}">
+                                            <li class="phone-bg">
+                                            <c:set var="count" value="${0}"></c:set>
+                                            <c:forEach var="sub" items="${entry.value}" varStatus="status">
+                                                <c:choose>
+                                                    <c:when test="${status.last && count == 0}">
+                                                        <ul>
+                                                            <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                        </ul>
+                                                        </li>
+                                                        </ul> <!-- End sub menu -->
+                                                        </li>
+                                                    </c:when>
+                                                    <c:when test="${status.last}">
+                                                        <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                        </ul>
+                                                        </li>
+                                                        </ul> <!-- End sub menu -->
+                                                        </li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:choose>
+                                                            <c:when test="${count == 0}">
+                                                                <ul class="clearlist menu-dt">
+                                                                <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                                <c:set var="count" value="${count + 1}"></c:set>
+                                                            </c:when>
+                                                            <c:when test="${count < 3}">
+                                                                <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                                <c:set var="count" value="${count + 1}"></c:set>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <li><a href="${sub.link}">${sub.menuName}</a></li>
+                                                                </ul>
+                                                                <c:set var="count" value="${0}"></c:set>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End mainmenu area -->
     </div>
 </div>
-<!-- End mainmenu area -->
+
+<%--Sticky menu--%>
+<script>
+    var scrollableElement = document.body; //document.getElementById('scrollableElement');
+    var menu = document.getElementById("header");
+    // scrollableElement.addEventListener('scroll', checkScrollDirection);
+
+    // function checkScrollDirection(event) {
+    //     if (checkScrollDirectionIsUp(event)) {
+    //         //console.log('UP');
+    //         menu.classList.remove("header-sticky");
+    //     } else {
+    //         //console.log('Down');
+    //        // if (document.body.scrollTop > 0) {
+    //             menu.classList.add("header-sticky");
+    //         //}
+    //     }
+    // }
+
+    var position = $(window).scrollTop();
+    // should start at 0
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        console.log(scroll);
+        if (scroll > position) {
+//            console.log('scrollDown');
+            if (scroll > 70) {
+                menu.classList.add("header-sticky");
+            }
+        } else {
+//            console.log('scrollUp');
+            if (scroll < 70) {
+                menu.classList.remove("header-sticky");
+            }
+        }
+        position = scroll;
+    });
+
+
+    // function checkScrollDirectionIsUp(event) {
+    //     if (event.scrollDelta) {
+    //         return event.wheelDelta > 0;
+    //     }
+    //     return event.deltaY < 0;
+    // }
+</script>
 
 <%--Search product--%>
 <script type="text/javascript">
@@ -343,7 +397,7 @@
                         "                                            </p>" +
                         "                                            <div>" +
                         "                                               <h3>" + obj[i].name + "</h3>" +
-                        "                                               <p class=\"fshop-search-prodprice\">" + formatNumber(obj[i].promotionPrice, ',', '.') + "₫</p></div>" +
+                        "                                               <p class=\"fshop-search-prodprice\">" + formatNumber(obj[i].promotionPrice, ',', '.') + "</p></div>" +
                         "                                 </a></li>");
                     // obj[i].name;
                 }
@@ -356,20 +410,9 @@
             }
         });
     }
-
-    // Định dạng tiền tệ
-    function formatNumber(nStr, decSeperate, groupSeperate) {
-        nStr += '';
-        x = nStr.split(decSeperate);
-        x1 = x[0];
-        x2 = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-            x1 = x1.replace(rgx, '$1' + groupSeperate + '$2');
-        }
-        return x1 + x2;
-    }
 </script>
+
+<script type="text/javascript" src="<%=Util.fullPath("js/utils.js")%>"></script>
 
 <!-- jQuery -->
 <script src="<%=Util.fullPathAdmin("assets/js/jquery-2.1.4.min.js")%>"></script>

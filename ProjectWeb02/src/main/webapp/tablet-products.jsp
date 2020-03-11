@@ -1,7 +1,9 @@
 <%@ page import="vn.nlu.fit.models.Product" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.nlu.fit.utils.Util" %>
 <%@ page import="vn.nlu.fit.models.Brand" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.lang.reflect.Array" %>
+<%@ page import="vn.nlu.fit.models.KeyValueOfPrices" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html lang="en">
@@ -96,267 +98,221 @@
     </section><!--End breadcrumb-->
 
     <%if (list.size() != 0) {%>
-    <!--Search bar-->
-    <div class="search-bar">
-        <div class="container">
-            <div class="content">
-                <!-- One dropdown -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-primary  dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            onclick="filterProduct()"
-                    >
-                        Thương hiệu
-                    </button>
 
-                    <div class="dropdown-menu">
-                        <%
-                            if (brandList.size() != 0) {
-                                for (Brand item : brandList) {
-                                    if ("".equals(queryString)) { %>
-                        <a class="dropdown-item" href="<%=Util.fullPath(servletPath+"?brand="+item.getBrandName())%>">
-                            <%=item.getBrandName()%>
-                        </a>
-                        <% } else {%>
-                        <a class="dropdown-item"
-                           href="<%=Util.fullPath(servletPath+queryString+"&brand="+item.getBrandName())%>">
-                            <%=item.getBrandName()%>
-                        </a>
-                        <%
-                                    }
-                                }
-                            }
-                        %>
-                    </div>
-                </div><!-- End one dropdown -->
-                <!-- One dropdown -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-primary  dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                        Giá sản phẩm
-                    </button>
-
-                    <div class="dropdown-menu">
-                        <%if ("".equals(queryString)) {%>
-
-                        <a class="dropdown-item" href="<%=Util.fullPath(servletPath+"?price=duoi-2-trieu")%>">Dưới 2
-                            triệu</a>
-                        <a class="dropdown-item" href="<%=Util.fullPath(servletPath+"?price=tu-2-4-trieu")%>">Từ 2 - 4
-                            triệu</a>
-                        <a class="dropdown-item" href="<%=Util.fullPath(servletPath+"?price=tu-4-7-trieu")%>">Từ 4 - 7
-                            triệu</a>
-                        <a class="dropdown-item" href="<%=Util.fullPath(servletPath+"?price=tu-7-13-trieu")%>">Từ 7 - 13
-                            triệu</a>
-                        <a class="dropdown-item" href="<%=Util.fullPath(servletPath+"?price=tren-13-trieu")%>">Trên 13
-                            triệu</a>
-                        <%} else {%>
-                        <a class="dropdown-item"
-                           href="<%=Util.fullPath(servletPath+queryString+"&price=duoi-2-trieu")%>">Dưới 2
-                            triệu</a>
-                        <a class="dropdown-item"
-                           href="<%=Util.fullPath(servletPath+queryString+"&price=tu-2-4-trieu")%>">Từ 2 - 4
-                            triệu</a>
-                        <a class="dropdown-item"
-                           href="<%=Util.fullPath(servletPath+queryString+"&price=tu-4-7-trieu")%>">Từ 4 - 7
-                            triệu</a>
-                        <a class="dropdown-item"
-                           href="<%=Util.fullPath(servletPath+queryString+"&price=tu-7-13-trieu")%>">Từ 7 - 13
-                            triệu</a>
-                        <a class="dropdown-item"
-                           href="<%=Util.fullPath(servletPath+queryString+"&price=tren-13-trieu")%>">Trên 13
-                            triệu</a>
-                        <%}%>
-                    </div>
-                </div><!-- End one dropdown -->
-                <!-- One dropdown -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-primary  dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                        Kích thước màn hình
-                    </button>
-
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                </div><!-- End one dropdown -->
-                <!-- One dropdown -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-primary  dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                        Bộ nhớ RAM
-                    </button>
-
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                </div><!-- End one dropdown -->
-                <!-- One dropdown -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-primary  dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                        Camera
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                </div><!-- End one dropdown -->
-                <!-- One dropdown -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-primary  dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                        Tính năng khác
-                    </button>
-
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                </div><!-- End one dropdown -->
-                <!-- One dropdown -->
-                <div class="btn-group float-right">
-                    <button type="button" class="btn btn-outline-primary  dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                        Sắp xếp
-                    </button>
-
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Nổi bật nhất</a>
-
-                        <a class="dropdown-item" href="<%=Util.fullPath(servletPath+"&sort=gia-thap-den-cao")%>">Giá
-                            thấp
-                            đến cao</a>
-                        <a class="dropdown-item" href="#">Giá cao đến thấp</a>
-                    </div>
-                </div><!-- End one dropdown -->
-            </div>
-        </div>
-    </div>
-    <!--End search bar-->
-
-    <!--Choosed filter-->
-    <div class="choosedfilter">
-        <div class="container">
-            <div class="content">
-                <strong>LỌC THEO: </strong>
-                <a href="#" class="btn btn-primary">Từ 2 - 4 triệu
-                    <i class="fas fa-times"></i>
-                </a>
-                <a href="#" class="btn btn-danger">Xóa tất cả
-                    <i class="fas fa-times"></i>
-                </a>
-            </div>
-        </div>
-    </div><!--End Choosed filter-->
-
-    <!-- Tablet noi bat -->
+    <!-- Filter product noi bat -->
     <section class="products">
         <div class="container">
             <div class="row">
                 <div class=" pr-0 pl-0">
                     <div class="filter">
-                        BỘ LỌC
-                        <div class="brand-filter">
-                            <h4>Hãng sản xuất</h4>
-                            <div class="filter-checkbox">
-                                <div class="checkbox-wrap check-all">
-                                    <label class="label-wrap">
-                                        <input type="checkbox" class="check-box" onclick="" data-id="SSGN10">
-                                        <span class="checkmark"><i class="fas fa-check"></i></span>
-                                        Tất cả
-                                    </label>
+                        <div class="title">
+                            Bộ lọc tìm kiếm
+                        </div>
+                        <div id="filters">
+                            <div class="card">
+                                <div class="card-header" data-toggle="collapse"
+                                     data-target="#collapseOne">Hãng sản xuất
+                                    <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <%
-                                    if (brandList.size() != 0) {
-                                        for (Brand item : brandList) {%>
-                                <div class="checkbox-wrap checkbox ">
-                                    <label class="label-wrap">
-                                        <input type="checkbox" class="check-box brand" value="<%=item.getBrandId()%>">
-                                        <span class="checkmark"><i class="fas fa-check"></i></span>
-                                        <%=item.getBrandName()%>
-                                    </label>
+                                <div id="collapseOne" class="collapse show">
+                                    <div class="card-body">
+                                        <div class="filter-checkbox" id="group-check01">
+                                            <div class="checkbox-wrap check-all">
+                                                <label class="label-wrap">
+                                                    <input type="checkbox" class="check-box" onclick=""
+                                                           data-id="group-check01">
+                                                    <span class="checkmark"><i class="fas fa-check"></i></span>
+                                                    Tất cả
+                                                </label>
+                                            </div>
+                                            <%
+                                                if (brandList.size() != 0) {
+                                                    for (Brand item : brandList) {%>
+                                            <div class="checkbox-wrap checkbox ">
+                                                <label class="label-wrap">
+                                                    <input type="checkbox" class="check-box brand"
+                                                           value="<%=item.getBrandId()%>" data-id="group-check01">
+                                                    <span class="checkmark"><i class="fas fa-check"></i></span>
+                                                    <%=item.getBrandName()%>
+                                                </label>
+                                            </div>
+                                            <%
+                                                    }
+                                                }
+                                            %>
+                                        </div>
+                                    </div>
                                 </div>
-                                <%
-                                        }
-                                    }
-                                %>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" data-toggle="collapse"
+                                     data-target="#collapseTwo">Giá sản phẩm
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div id="collapseTwo" class="collapse show">
+                                    <div class="card-body">
+                                        <div class="filter-checkbox" id="group-check02">
+                                            <div class="checkbox-wrap check-all">
+                                                <label class="label-wrap">
+                                                    <input type="checkbox" class="check-box" data-id="group-check02">
+                                                    <span class="checkmark"><i class="fas fa-check"></i></span>
+                                                    Tất cả
+                                                </label>
+                                            </div>
+                                            <%
+                                                ArrayList<KeyValueOfPrices> prices = new ArrayList<>();
+                                                prices.add(new KeyValueOfPrices("0-2000000", "Dưới 2 triệu"));
+                                                prices.add(new KeyValueOfPrices("2000000-4000000", "Từ 2 - 4 triệu"));
+                                                prices.add(new KeyValueOfPrices("4000000-7000000", "Từ 4 - 7 triệu"));
+                                                prices.add(new KeyValueOfPrices("7000000-13000000", "Từ 7 - 13 triệu"));
+                                                prices.add(new KeyValueOfPrices("13000000-200000000", "Trên 13 triệu"));
+                                            %>
+                                            <%
+                                                for (KeyValueOfPrices st : prices) {
+                                            %>
+                                            <div class="checkbox-wrap checkbox">
+                                                <label class="label-wrap">
+                                                    <input type="checkbox" class="check-box price"
+                                                           value="<%=st.getKey()%>"
+                                                           data-id="group-check02">
+                                                    <span class="checkmark"><i class="fas fa-check"></i></span>
+                                                    <%=st.getValue()%>
+                                                </label>
+                                            </div>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" data-toggle="collapse"
+                                     data-target="#collapseThree">Bộ nhớ Ram
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div id="collapseThree" class="collapse">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">First item</li>
+                                        <li class="list-group-item">Second item</li>
+                                        <li class="list-group-item">Third item</li>
+                                        <li class="list-group-item">Fourth item</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="resultFilter  ">
-                    <div class="sectionTitle">
-                        <a href="#"><h2><%=catalogName%> nổi bật nhất</h2></a>
-
-                        <%--            <div class="section-menu">--%>
-                        <%--                <ol class="breadcrumb">--%>
-                        <%--                    <li><a href="#"><h2>Apple</h2></a></li>--%>
-                        <%--                    <li><a href="#"><h2>Samsung</h2></a></li>--%>
-                        <%--                    <li><a href="#"><h2>Nokia</h2></a></li>--%>
-                        <%--                    <li><a href="#"><h2>OPPO</h2></a></li>--%>
-                        <%--                </ol>--%>
-                        <%--            </div>--%>
-                    </div>
-                    <div class="list-product">
-                        <div class="product-item">
-                            <div class="row">
-                                <!-- Một sản phẩm -->
-                                <% for (Product p : list) { %>
-                                <div class="product col-sm-3 col-12">
-                                    <a href="<%= Util.fullPath("DetailProduct?id="+p.getCode())%>">
-                                        <img src="<% if (p.getListImg().length>0){%><%=p.getListImg()[0]%><%}%>"
-                                             alt="">
-                                        <div class="content">
-                                            <h3>
-                                                <%= p.getName()%>
-                                            </h3>
-                                            <div class="price">
-                                                <strong>
-                                                    <%= Util.convertToVndCurrency(p.getPromotionPrice())%>
-                                                </strong>
-                                                <span>
+                <div class="resultFilter">
+                    <div class="resultFilter-swrap">
+                        <div class="sectionTitle">
+                            <a href="#"><h2><%=catalogName%> nổi bật nhất</h2></a>
+                            <div id="sort" class="dropdown ">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" data-value="noi-bat-nhat" aria-haspopup="true" aria-expanded="false">
+                                    Sắp xếp theo: <span class="sortText">Nổi bật nhất</span> <i class="icdt"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" data-value="noi-bat-nhat" href="javascript:;">
+                                        <i class="fas fa-check"></i>Nổi bật nhất</a>
+                                    <a class="dropdown-item" data-value="gia-cao-den-thap" href="javascript:;">Giá cao đến thấp</a>
+                                    <a class="dropdown-item" data-value="gia-thap-den-cao" href="javascript:;">
+                                        Giá thấp đến cao
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choosedfilter">
+                            <div class="content">
+                                <strong>LỌC THEO: </strong>
+                                <span class="btn btn-primary">Từ 2 - 4 triệu
+                                    <i class="fas fa-times"></i>
+                                </span>
+                                <span class="btn btn-danger">Xóa tất cả
+                                    <i class="fas fa-times"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="list-product">
+                            <div class="product-item">
+                                <div class="row">
+                                    <!-- Một sản phẩm -->
+                                    <% for (Product p : list) { %>
+                                    <div class="product col-sm-3 col-12">
+                                        <a href="<%= Util.fullPath("DetailProduct?id="+p.getCode())%>">
+                                            <img src="<% if (p.getListImg().length>0){%><%=p.getListImg()[0]%><%}%>"
+                                                 alt="">
+                                            <div class="content">
+                                                <h3>
+                                                    <%= p.getName()%>
+                                                </h3>
+                                                <div class="price">
+                                                    <strong>
+                                                        <%= Util.convertToVndCurrency(p.getPromotionPrice())%>
+                                                    </strong>
+                                                    <span>
                                         <%= Util.convertToVndCurrency(p.getPrice())%>
                                     </span>
+                                                </div>
+                                                <div class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <span>50 Đánh giá</span>
+                                                </div>
+                                                <lablel class="discount">
+                                                    GIẢM <%= Util.convertToVndCurrency(p.getPrice() - p.getPromotionPrice())%>
+                                                </lablel>
+                                                <div class="promo">
+                                                    <p> Phiếu mua hàng trị giá 1 triệu</p>
+                                                </div>
                                             </div>
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
-                                                <i class="far fa-star"></i>
-                                                <span>50 Đánh giá</span>
-                                            </div>
-                                            <lablel class="discount">
-                                                GIẢM <%= Util.convertToVndCurrency(p.getPrice() - p.getPromotionPrice())%>
-                                            </lablel>
-                                            <div class="promo">
-                                                <p> Phiếu mua hàng trị giá 1 triệu</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div><!-- Kết thúc một sản phẩm -->
-                                <% }%>
+                                        </a>
+                                    </div><!-- Kết thúc một sản phẩm -->
+                                    <% }%>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Phân trang  -->
+                        <div id="pagination" class="pagination">
+                            <div class="container bg_white">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="list-page pagination  justify-content-center">
+                                        <%if (numberOfPages == 1) {%>
+                                        <li class="page-item active"><a class="page-link" onclick="items(this)" href="javascript:;">1</a></li>
+                                        <%} else {%>
+                                        <li id="btn_prev" class="page-item<%=pageProduct==1?" disabled":""%>">
+                                            <a class="page-link" onclick="prevPage()"  href="javascript:;"
+                                               aria-label="Previous">
+                                                <span aria-hidden="true">Trước</span>
+                                            </a>
+                                        </li>
+                                        <%
+                                            for (int i = 0; i < numberOfPages; i++) {%>
+                                        <li class="page-item item <%=pageProduct==i+1?" active":""%>">
+                                            <a class="page-link" onclick="items(this)" href="javascript:;"><%=i + 1%>
+                                            </a>
+                                        </li>
+                                        <% }%>
+                                        <li id="btn_next" class="page-item<%=pageProduct==numberOfPages?" disabled":""%>">
+                                            <a class="page-link" onclick="nextPage()"  href="javascript:;"
+                                               aria-label="Next">
+                                                <span aria-hidden="true">Tiếp</span>
+                                            </a>
+                                        </li>
+                                        <%}%>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div><!-- End phân trang  -->
+                        <div class="loaderWrap" style="display: none">
+                            <div class="loader"></div>
+                        </div>
+                        <div class="nullResult" style="display: none">
+                            <div class="container" style="padding: 50px;text-align: center;">
+                                <img src="img/noti-search.png" alt="">
+                                <p class="fs-senull-l2">Rất tiếc chúng tôi không tìm thấy kết quả theo yêu cầu của bạn
+                                    Vui lòng thử lại .</p>
                             </div>
                         </div>
                     </div>
@@ -365,40 +321,10 @@
         </div>
     </section> <!-- End dien thoai noi bat -->
 
-    <!-- Phân trang  -->
-    <section class="pagination">
-        <div class="container bg_white">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination  justify-content-end">
-                    <%if (numberOfPages == 1) {%>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <%} else {%>
-                    <li class="page-item <%=pageProduct==1?"disabled":""%>">
-                        <a class="page-link" href="<%=Util.fullPath(servletPath+"?page="+( pageProduct - 1))%>"
-                           aria-label="Previous">
-                            <span aria-hidden="true">Trước</span>
-                        </a>
-                    </li>
-                    <%
-                        for (int i = 0; i < numberOfPages; i++) {%>
-                    <li class="page-item <%=pageProduct==i+1?"active":""%>">
-                        <a class="page-link" href="<%=Util.fullPath(servletPath+"?page="+(i+1))%>"><%=i + 1%>
-                        </a>
-                    </li>
-                    <% }%>
-                    <li class="page-item <%=pageProduct==numberOfPages?"disabled":""%>">
-                        <a class="page-link" href="<%=Util.fullPath(servletPath+"?page="+(pageProduct + 1))%>"
-                           aria-label="Next">
-                            <span aria-hidden="true">Tiếp</span>
-                        </a>
-                    </li>
-                    <%}%>
-                </ul>
-            </nav>
-        </div>
-    </section><!-- End phân trang  -->
 
-    <%} else {%>
+    <%
+    } else {
+    %>
     <div class="container" style="padding: 50px;text-align: center;">
         <img src="img/noti-search.png" alt="">
         <p class="fs-senull-l2"><strong>
@@ -429,100 +355,80 @@
 <script src="js/bootstrap4/bootstrap.min.js"></script>
 
 <!-- jQuery sticky menu -->
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.sticky.js"></script>
+<%--<script src="js/owl.carousel.min.js"></script>--%>
+<%--<script src="js/jquery.sticky.js"></script>--%>
 
 <!-- jQuery easing -->
 <script src="js/jquery.easing.1.3.min.js"></script>
 
 <!-- Main Script -->
-<script src="js/main.js"></script>
+<%--<script src="js/main.js"></script>--%>
 
 <!-- Slider -->
 <script type="text/javascript" src="js/bxslider.min.js"></script>
 <script type="text/javascript" src="js/script.slider.js"></script>
 
-<script>
-    function filterProduct() {
-
-
-    }
-
-    $('input[type=checkbox]').click(function () {
-        var brand = JSON.stringify(get_filter_text('brand'));
-        var price = 'data price';
-        console.log(brand);
-        $.ajax({
-            url: 'mobileList',
-            type: 'post',
-            data: { // Danh sách các thuộc tính sẽ gửi đi
-                brand, price
-            },
-            datatype: 'json',
-            headers: {
-                Accept: "application/json; charset=utf-8",
-            },
-            error: function () {
-                alert("error");
-            },
-            success: function (data) {
-                // alert("success");
-                // var myObj = JSON.parse(data);
-                // id = myObj.id;
-                // var catalogName = myObj.name;
-                // var catalogParentId = myObj.parentId;
-                // $('#catalog-name').val(catalogName);
-                // $('#catalog-select').find('option').each(function () {
-                //     var selected = $(this);
-                //
-                //     if (selected.val() == catalogParentId) {
-                //         console.log(selected);
-                //         console.log(selected.val());
-                //         selected.attr('selected', true);
-                //     } else {
-                //         selected.attr("selected", false);
-                //     }
-                // })
-                // if (catalogParentId)
-            }
-        });
-    });
-
-    function get_filter_text(text_class) {
-        var filter_data = [];
-        $('.' + text_class + ':checked').each(function () {
-            filter_data.push($(this).val());
-        });
-        // console.log(filter_data);
-        return filter_data
-    }
-</script>
+<script type="text/javascript" src="js/mymain.js"></script>
+<script type="text/javascript" src="<%=Util.fullPath("js/utils.js")%>"></script>
 
 <script>
+    var groupCheckListID, groupCheckList;
     // check/ uncheck all check box
     $(".check-all").click(function () {
-        $(".checkbox").find('input').prop("checked", $(this).find('input').is(':checked'));
-    });
-
-    $(".checkbox").click(function () {
-        if (allChecked()) {
-            $(".check-all").find('input').prop("checked", true);
+        groupCheckListID = $(this).find('input').data('id');
+        groupCheckList = $('#' + groupCheckListID).find('.checkbox');
+        groupCheckList.find('input').prop("checked", false);
+        if ($(this).find('input').is(':checked')) {
+            $('#' + groupCheckListID).find(".check-all").find('input').click(false);
         } else {
-            $(".check-all").find('input').prop("checked", false);
+            $('#' + groupCheckListID).find(".check-all").find('input').prop("checked", true);
         }
     });
 
-    if (allChecked()) {
-        $(".check-all").find('input').prop("checked", true);
-    } else {
-        $(".check-all").find('input').prop("checked", false);
+    $(".checkbox").click(function () {
+        groupCheckListID = $(this).find('input').data('id');
+        groupCheckList = $('#' + groupCheckListID).find('.checkbox');
+        if (allChecked(groupCheckList)) {
+            $('#' + groupCheckListID).find(".check-all").find('input').prop("checked", true);
+            groupCheckList.find('input').prop("checked", false);
+        } else {
+            $('#' + groupCheckListID).find(".check-all").find('input').prop("checked", false);
+        }
+        if (allUnChecked(groupCheckList)) {
+            $('#' + groupCheckListID).find(".check-all").find('input').prop("checked", true);
+        } else {
+            $('#' + groupCheckListID).find(".check-all").find('input').prop("checked", false);
+        }
+    });
+
+    $(".card").each(function () {
+        var groupCheckListID = $(this).find(".check-all").find('input').data('id');
+        var groupCheckList = $('#' + groupCheckListID).find('.checkbox');
+        if (allUnChecked(groupCheckList)) {
+            $('#' + groupCheckListID).find(".check-all").find('input').prop("checked", true);
+        } else {
+
+        }
+    });
+
+
+    function allChecked(groupCheckList) {
+        var check = true;
+        var checkboxes = groupCheckList;
+        for (var i = 0; i < checkboxes.size(); i++) {
+            if (!checkboxes[i].getElementsByTagName('input')[0].checked) {
+                check = false;
+            }
+        }
+        // console.log(check);
+        return check;
     }
 
-    function allChecked() {
+    function allUnChecked(groupCheckList) {
         var check = true;
-        var checkboxes = document.getElementsByClassName("checkbox");
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (!checkboxes[i].getElementsByTagName('input')[0].checked) {
+        var checkboxes = groupCheckList;
+        for (var i = 0; i < checkboxes.size(); i++) {
+            if (checkboxes[i].getElementsByTagName('input')[0].checked) {
                 check = false;
             }
         }
