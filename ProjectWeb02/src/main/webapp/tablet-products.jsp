@@ -207,20 +207,22 @@
                             <a href="#"><h2><%=catalogName%> nổi bật nhất</h2></a>
                             <div id="sort" class="dropdown ">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" data-value="noi-bat-nhat" aria-haspopup="true" aria-expanded="false">
+                                        data-toggle="dropdown" data-value="noi-bat-nhat" aria-haspopup="true"
+                                        aria-expanded="false">
                                     Sắp xếp theo: <span class="sortText">Nổi bật nhất</span> <i class="icdt"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" data-value="noi-bat-nhat" href="javascript:;">
                                         <i class="fas fa-check"></i>Nổi bật nhất</a>
-                                    <a class="dropdown-item" data-value="gia-cao-den-thap" href="javascript:;">Giá cao đến thấp</a>
+                                    <a class="dropdown-item" data-value="gia-cao-den-thap" href="javascript:;">Giá cao
+                                        đến thấp</a>
                                     <a class="dropdown-item" data-value="gia-thap-den-cao" href="javascript:;">
                                         Giá thấp đến cao
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="choosedfilter">
+                        <div class="choosedfilter" style="display: none">
                             <div class="content">
                                 <strong>LỌC THEO: </strong>
                                 <span class="btn btn-primary">Từ 2 - 4 triệu
@@ -279,10 +281,11 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="list-page pagination  justify-content-center">
                                         <%if (numberOfPages == 1) {%>
-                                        <li class="page-item active"><a class="page-link" onclick="items(this)" href="javascript:;">1</a></li>
+                                        <li class="page-item active"><a class="page-link" onclick="items(this)"
+                                                                        href="javascript:;">1</a></li>
                                         <%} else {%>
                                         <li id="btn_prev" class="page-item<%=pageProduct==1?" disabled":""%>">
-                                            <a class="page-link" onclick="prevPage()"  href="javascript:;"
+                                            <a class="page-link" onclick="prevPage()" href="javascript:;"
                                                aria-label="Previous">
                                                 <span aria-hidden="true">Trước</span>
                                             </a>
@@ -294,8 +297,9 @@
                                             </a>
                                         </li>
                                         <% }%>
-                                        <li id="btn_next" class="page-item<%=pageProduct==numberOfPages?" disabled":""%>">
-                                            <a class="page-link" onclick="nextPage()"  href="javascript:;"
+                                        <li id="btn_next"
+                                            class="page-item<%=pageProduct==numberOfPages?" disabled":""%>">
+                                            <a class="page-link" onclick="nextPage()" href="javascript:;"
                                                aria-label="Next">
                                                 <span aria-hidden="true">Tiếp</span>
                                             </a>
@@ -373,6 +377,7 @@
 
 <script>
     var groupCheckListID, groupCheckList;
+
     // check/ uncheck all check box
     $(".check-all").click(function () {
         groupCheckListID = $(this).find('input').data('id');
@@ -401,15 +406,20 @@
         }
     });
 
-    $(".card").each(function () {
-        var groupCheckListID = $(this).find(".check-all").find('input').data('id');
-        var groupCheckList = $('#' + groupCheckListID).find('.checkbox');
-        if (allUnChecked(groupCheckList)) {
-            $('#' + groupCheckListID).find(".check-all").find('input').prop("checked", true);
-        } else {
 
-        }
-    });
+    checkAllCheckbox();
+
+    //  Tick the all-checkbox if there is no any checkboxes checked
+    function checkAllCheckbox() {
+        $(".card").each(function () {
+            var groupCheckListID = $(this).find(".check-all").find('input').data('id');
+            var groupCheckList = $('#' + groupCheckListID).find('.checkbox');
+            if (allUnChecked(groupCheckList)) {
+                $('#' + groupCheckListID).find(".check-all").find('input').prop("checked", true);
+                console.log("enter this");
+            }
+        });
+    }
 
 
     function allChecked(groupCheckList) {

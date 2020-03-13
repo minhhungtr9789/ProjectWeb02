@@ -324,7 +324,6 @@
     // should start at 0
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        console.log(scroll);
         if (scroll > position) {
 //            console.log('scrollDown');
             if (scroll > 70) {

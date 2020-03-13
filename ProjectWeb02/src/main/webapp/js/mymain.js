@@ -1,7 +1,45 @@
-function filterProduct() {
+// .choosedfilter .btn
+function removeFilter(element, id, value) {
+    if ($(element).hasClass("btn-primary")) {
+        console.log("enter here 1");
+        if ($(".choosedfilter .btn-primary").size() <= 1) {
+            // remove this checkbox
+            $(".choosedfilter .btn").remove();
+            $(".resultFilter .choosedfilter").hide();
+        } else {
+            $(element).remove();
+        }
 
+        // uncheck this checkbox
+        $("#" + id).find("input").each(function () {
+            console.log($(this).val() + ":" + value);
+            if ($(this).val() == value) {
+                console.log("enter hẻe2");
+                $(this).prop("checked", false);
+            }
+        });
+    } else {
+        console.log("enter here 2");
+        $(".choosedfilter .btn").remove();
+        $(".resultFilter .choosedfilter").hide();
 
+        // uncheck all checkbox
+        $('input:checked').prop("checked", false);
+    }
+    // Tick the all-checkbox if there is no any checkboxes checked
+    checkAllCheckbox();
+    // call AJAX method to load new data from server
+    getProductFilter();
 }
+
+// $(".choosedfilter .btn").click(function () {
+//     console.log("enter choooo");
+//     if ($(this).hasClass(".primary")) {
+//         $(this).remove();
+//     } else {
+//         $(".choosedfilter .btn").remove();
+//     }
+// });
 
 // js for pagination
 var current_page = 1;
@@ -202,13 +240,19 @@ function getProductFilter(current_page) {
                             } else {
                                 btn_next.removeClass("disabled");
                             }
-                            console.log($(".pagination .list-page .page-item"))
+                            //console.log($(".pagination .list-page .page-item"))
                         }
                     } else {
+                        sectionTitle.show();
+                        choosedfilter.show();
                         loader.hide();
                         nullResult.show();
                     }
-
+                    choosedfilter.find("span").remove();
+                    choosedfilter.find(".content").append(findChoosedfilter());
+                    if (choosedfilter.find("span").length == 0) {
+                        choosedfilter.hide();
+                    }
 
                     var sub_url = window.location.origin + window.location.pathname;
                     var map = new Map();
@@ -230,7 +274,7 @@ function getProductFilter(current_page) {
                 }
             }
         );
-    }
+    };
     setTimeout(ajaxCall, 200);
 }
 
@@ -246,6 +290,29 @@ function get_filter_text(text_class) {
         }
     });
     //console.log("filter_data"+filter_data+"2");
+    return filter_data
+}
+
+function findChoosedfilter() {
+    var filter_data = '';
+    var set = $('input:checked');
+    var length = set.length;
+    console.log("enter filter check");
+    set.each(function (index) {
+        if ($(this).parent().text().trim() != "Tất cả") {
+            var dataID = $(this).parent().find("input").data("id");
+            var value = $(this).parent().find("input").val();
+            filter_data += "<span class=\"btn btn-primary\" onclick=\"removeFilter(this, '" + dataID + "', '" + value + "')\">" + $(this).parent().text().trim() +
+                "                                    <i class=\"fas fa-times\"></i>\n" +
+                "                                </span>";
+        }
+        //console.log("filter_data: " + filter_data);
+    });
+    if (filter_data.trim() != "") {
+        filter_data += "<span class=\"btn btn-danger\"onclick='removeFilter(this)'>Xóa tất cả\n" +
+            "                                    <i class=\"fas fa-times\"></i>\n" +
+            "                                </span>";
+    }
     return filter_data
 }
 
