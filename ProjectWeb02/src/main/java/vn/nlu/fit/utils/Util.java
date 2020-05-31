@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Normalizer;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.regex.Pattern;
